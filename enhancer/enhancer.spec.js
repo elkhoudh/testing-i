@@ -1,13 +1,13 @@
 const { enhancer } = require("./enhancer");
 
 describe("enhancer", () => {
-  describe("repair", () => {
+  describe("repair()", () => {
     it("sets durability to 100", () => {
       expect(enhancer.repair({ durability: 80 }).durability).toBe(100);
     });
   });
 
-  describe("fail", () => {
+  describe("fail()", () => {
     it("checks if durability > 25", () => {
       expect(() => {
         enhancer.fail({ durability: 26 }).durability;
@@ -41,7 +41,7 @@ describe("enhancer", () => {
     });
   });
 
-  describe("success", () => {
+  describe("success()", () => {
     it("checks if enhancement is less than or equal to 16", () => {
       expect(enhancer.success({ enhancement: 15 }).enhancement).toBe(15);
     });
