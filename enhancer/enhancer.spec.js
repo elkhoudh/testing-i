@@ -7,13 +7,69 @@ describe("enhancer", () => {
     });
   });
 
-  describe("success", () => {
+  describe("fail", () => {
     it("checks if durability > 25", () => {
       expect(() => {
         enhancer.fail({ durability: 26 }).durability;
       }).toThrow();
     });
+
+    it("checks if durability is between 0 - 15", () => {
+      expect(enhancer.fail({ enhancement: 10, durability: 20 })).toEqual({
+        enhancement: 10,
+        durability: 15
+      });
+    });
+
+    it("checks if durability is between 10 - 14", () => {
+      expect(() => {
+        enhancer.fail({ durability: 9 }).durability;
+      }).toThrow();
+    });
+
+    it("subtracts 10 from durability", () => {
+      expect(enhancer.fail({ durability: 20 })).toEqual({
+        durability: 10
+      });
+    });
+
+    it("Checks name if enhancement is greater than 16", () => {
+      expect(enhancer.fail({ enhancement: 16, displayName: "" })).toEqual({
+        enhancement: 15,
+        displayName: ""
+      });
+    });
   });
 
-  describe("fail", () => {});
+  describe("success", () => {
+    it("checks if enhancement is less than or equal to 16", () => {
+      expect(enhancer.success({ enhancement: 15 }).enhancement).toBe(15);
+
+      expect(
+        enhancer.success({ enhancement: 16, displayName: "banana" })
+      ).toEqual({
+        enhancement: 17,
+        displayName: "PRI"
+      });
+
+      expect(enhancer.success({ enhancement: 17, displayName: "" })).toEqual({
+        enhancement: 18,
+        displayName: "DUO"
+      });
+
+      expect(enhancer.success({ enhancement: 18, displayName: "" })).toEqual({
+        enhancement: 19,
+        displayName: "TRI"
+      });
+      expect(enhancer.success({ enhancement: 19, displayName: "" })).toEqual({
+        enhancement: 20,
+        displayName: "TET"
+      });
+      expect(enhancer.success({ enhancement: 20, displayName: "" })).toEqual({
+        enhancement: 20,
+        displayName: "PEN"
+      });
+      expect(enhancer.success(typeof {})).toBe("object");
+    });
+  });
 });

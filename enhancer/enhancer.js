@@ -30,8 +30,7 @@ const enhancer = {
       case 20:
         return {
           ...item,
-          displayName: "PEN",
-          enhancement: item.enhancement + 1
+          displayName: "PEN"
         };
       default:
         return item;
@@ -51,7 +50,11 @@ const enhancer = {
     } else if (item.enhancement > 16) {
       switch (item.enhancement) {
         case 16:
-          return { ...item, displayName: "PRI" };
+          return {
+            ...item,
+            displayName: "PRI",
+            enhancement: item.enhancement - 1
+          };
         case 17:
           return {
             ...item,
@@ -79,6 +82,8 @@ const enhancer = {
         default:
           return item;
       }
+    } else if (item.enhancement <= 16) {
+      return { ...item, enhancement: item.enhancement - 1 };
     }
   },
   repair: item => ({ ...item, durability: 100 })
