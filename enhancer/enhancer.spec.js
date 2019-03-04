@@ -44,31 +44,46 @@ describe("enhancer", () => {
   describe("success", () => {
     it("checks if enhancement is less than or equal to 16", () => {
       expect(enhancer.success({ enhancement: 15 }).enhancement).toBe(15);
+    });
 
+    it("adds 1 to 16", () => {
       expect(
         enhancer.success({ enhancement: 16, displayName: "banana" })
       ).toEqual({
         enhancement: 17,
         displayName: "PRI"
       });
+    });
 
+    it("adds 1 to 17", () => {
       expect(enhancer.success({ enhancement: 17, displayName: "" })).toEqual({
         enhancement: 18,
         displayName: "DUO"
       });
+    });
 
+    it("adds 1 to 18", () => {
       expect(enhancer.success({ enhancement: 18, displayName: "" })).toEqual({
         enhancement: 19,
         displayName: "TRI"
       });
+    });
+
+    it("adds 1 to 19", () => {
       expect(enhancer.success({ enhancement: 19, displayName: "" })).toEqual({
         enhancement: 20,
         displayName: "TET"
       });
+    });
+
+    it("keeps enhancement the same", () => {
       expect(enhancer.success({ enhancement: 20, displayName: "" })).toEqual({
         enhancement: 20,
         displayName: "PEN"
       });
+    });
+
+    it("checks if the item is an object", () => {
       expect(enhancer.success(typeof {})).toBe("object");
     });
   });
